@@ -1,0 +1,3 @@
+Assignment 7: Cars and Racing
+
+The goal is to make the car drive 3 laps around the track. Use the vehicle colliders to move the car. Try to make the car drive around the track as fast as possible.

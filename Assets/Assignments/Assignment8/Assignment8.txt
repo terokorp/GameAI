@@ -1,0 +1,16 @@
+Assignment 8:
+
+The goal is to create a simple RTS where two AI controlled Farms compete over resources. There are two types of NPC:s:
+-Farmers
+	- Farmers move slower than Woodcutters
+	- Farmers plant Carrots in Farmland if there is free space for Carrots in Farmland
+	- It takes some time for the Carrot to grow
+	- When a Carrot is fully grown, the Farmer picks up the Carrot and carries it to the CarrotStorage
+	- If the Farmer spots an opposing Woodcutter, it will try to run away
+	- Farmer can not attack
+-Woodcutters
+	- Woodcutters go to the Forest to cut down Trees
+	- The Tree should take a number of hits to cut
+	- Once the Tree has been cut, it should fall and turn in to a log
+	- The Woodcutter should pick up the Log and carry it to their Logpile
+	- If the Woodcutter sees an enemy they will stop what they are doing and attack the enemy

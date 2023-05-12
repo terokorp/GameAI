@@ -1,0 +1,11 @@
+Assignment 5: Tower Defense
+
+The goal is to create a simple Tower Defense game. You need to implement the following features:
+- The AgentSpawners should spawn Agents at some interval
+- The spawned Agents should navigate towards a tree
+- The Turrets should shoot Projectiles(Prefab can be found in Assets->Prefabs folder) at an Agent on a set interval when an Agent is close enough to the Turret
+- The Turret can only shoot Projectiles straight forward from the Barrel so you need to aim the Barrel at the Agent when firing
+- Destroy the Agent once it takes too much damage
+- When the Agent reaches a Tree, it should start hitting the tree with an Axe
+- The Tree should fall once it takes enough damage
+- The Agent should have and idle animation when stationary, walk animation when moving and WoodChop animation when hitting the Tree (Animator can be found in Assets->Animators folder)

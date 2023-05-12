@@ -1,0 +1,8 @@
+Assignment 3: Offmesh Link
+
+The goal is to guide the agent to the collectables and make them collect all the collectable. You need to implement the following features:
+- The Agent should navigate to the Collectable when the scene starts
+- The Agent should pick up the Collectable when it reaches the Collectable
+- After picking up the Collectable the Agent should navigate towards the next Collectable
+- Use OffMesh-links to jump from one island to the other
+- The Agent should have and idle animation when stationary, walk animation when moving and crouch animation when picking up the Collectable (Animator can be found in Assets->Animators folder)

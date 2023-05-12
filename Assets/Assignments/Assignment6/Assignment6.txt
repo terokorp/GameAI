@@ -1,0 +1,3 @@
+Assignment 6: Pong
+
+The goal is to create a Pong clone (https://www.ponggame.org/). You can choose whether to make it Player vs. PC or PC vs. PC.
