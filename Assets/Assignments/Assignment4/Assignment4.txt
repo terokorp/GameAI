@@ -4,5 +4,6 @@ The goal is to guide the agent to the collectables and make them collect all the
 - The Agent should navigate to the Collectable when the scene starts
 - The Agent should pick up the Collectable when it reaches the Collectable
 - After picking up the Collectable the Agent should navigate towards the next Collectable
-- Use OffMesh-links to jump from one island to the other and to jump on top of the cube
+- To get from one island to the other, the Agent must push the Movable object to the hole between the islands. The Agent should not be able to move from one island to the other before the Movable object has been moved to the hole between the islands.
+- Activate the OffMesh-links to get from one island to the other once the Agent has pushed the cube to the hole
 - The Agent should have and idle animation when stationary, walk animation when moving and crouch animation when picking up the Collectable (Animator can be found in Assets->Animators folder)
