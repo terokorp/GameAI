@@ -10,7 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7503365770807594185}
   - component: {fileID: 4345024845196002365}
-  - component: {fileID: 2021412677989433324}
+  - component: {fileID: 7894820277783735284}
+  - component: {fileID: 86112349289987670}
+  - component: {fileID: 5055941536081560109}
   m_Layer: 0
   m_Name: Agent
   m_TagString: Untagged
@@ -48,7 +50,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 1.75
+  m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -56,7 +58,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &2021412677989433324
+--- !u!114 &7894820277783735284
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -65,16 +67,39 @@ MonoBehaviour:
   m_GameObject: {fileID: 7503365770807594190}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89cc8bb94278ba544805f2854d232bd7, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f049a1e6925ecc4989cc5c8babde606, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  startDelay: 2
-  pickupDistance: 1.75
+--- !u!114 &86112349289987670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7503365770807594190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d103d9aa36b65840a78c4de494e4cfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!143 &5055941536081560109
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7503365770807594190}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &8972857029472277109
 GameObject:
   m_ObjectHideFlags: 0

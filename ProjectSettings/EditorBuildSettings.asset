@@ -4,5 +4,29 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Assignments/Assignment1/Assignment1.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Assignments/Assignment2/Assignment2.unity
+    guid: b38f6ba38f038c04582d8a2300aac121
+  - enabled: 1
+    path: Assets/Assignments/Assignment3/Assignment3.unity
+    guid: d2c2be9e1d40b0e42a920b9a18d84cf4
+  - enabled: 1
+    path: Assets/Assignments/Assignment4/Assignment4.unity
+    guid: 87091af1dee1dc249af24a7b544f5df8
+  - enabled: 1
+    path: Assets/Assignments/Assignment5/Assignment5.unity
+    guid: 1302472c60a8f9e4ca5bfdd2b848a909
+  - enabled: 1
+    path: Assets/Assignments/Assignment6/Assignment6.unity
+    guid: a1fad631a26dd9f4799e379469a2b1ef
+  - enabled: 1
+    path: Assets/Assignments/Assignment7/Assignment7.unity
+    guid: fb4727b496b762246856e52e6151ac48
+  - enabled: 1
+    path: Assets/Assignments/Assignment8/Assignment8.unity
+    guid: 29f95e4724ad03042976f0445be8ca27
   m_configObjects: {}
