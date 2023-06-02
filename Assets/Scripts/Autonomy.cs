@@ -23,21 +23,14 @@ public class Autonomy : MonoBehaviour
         _initialized = true;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
     // This function is called when the object becomes enabled and active
     private void OnEnable()
     {
         if (!_initialized)
             return;
+
+        if (AgentManager.Instance)
+            AgentManager.Instance.RegisterAgent(this);
 
         _tasksCoroutine = StartCoroutine(DoTasks());
     }
@@ -45,6 +38,9 @@ public class Autonomy : MonoBehaviour
     // This function is called when the behaviour becomes disabled or inactive
     private void OnDisable()
     {
+        if (AgentManager.Instance)
+            AgentManager.Instance.UnregisterAgent(this);
+
         StopCoroutine(_tasksCoroutine);
     }
     #endregion
@@ -60,9 +56,9 @@ public class Autonomy : MonoBehaviour
             if (_task.HasValue)
             {
                 _agent.SetDestination(_task.Value.taskPosition.position);
-                yield return new WaitUntil(() => (_agent.hasPath == true && _agent.pathPending == false) && CheckWorkDistance(_task.Value)); // TODO is distance reached
+                yield return new WaitUntil(() => (_agent.hasPath == true && _agent.pathPending == false) && CheckWorkDistance(_task)); // TODO is distance reached
 
-                if (_task.Value.taskObject != null)
+                if (_task.HasValue && _task.Value.taskPosition != null && _task.Value.taskObject != null)
                     yield return _task.Value.taskObject.DoTask(_character);
             }
             else
@@ -70,15 +66,20 @@ public class Autonomy : MonoBehaviour
         }
     }
 
-    private bool CheckWorkDistance(AutonomyTask task)
+    private bool CheckWorkDistance(AutonomyTask? task)
     {
-        return Vector3.Distance(_agent.transform.position, task.taskPosition.position) <= task.workDistance;
+        if (!task.HasValue)
+            return true;
+        if (task.Value.taskPosition == null)
+            return true;
+
+        return Vector3.Distance(_agent.transform.position, task.Value.taskPosition.position) <= task.Value.workDistance;
     }
 
     // Solves which task to do
     private IEnumerator SolveTask()
     {
-        Debug.Log("Solving task");
+        //Debug.Log("Solving task");
         _task = null;
 
         foreach (var t in AiTaskManager.Instance.tasks.OrderBy(o => o.taskPriority).ThenBy(o => o.queueTime))
