@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7894820277783735284}
   - component: {fileID: 86112349289987670}
   - component: {fileID: 5055941536081560109}
+  - component: {fileID: -5048992250779978346}
   m_Layer: 0
   m_Name: Agent
   m_TagString: Untagged
@@ -100,6 +101,34 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &-5048992250779978346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7503365770807594190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b24f207ec3707cf43ae46c523b20d9fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 3
+  OnDying:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7894820277783735284}
+        m_TargetAssemblyTypeName: Character, Assembly-CSharp
+        m_MethodName: Die
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8972857029472277109
 GameObject:
   m_ObjectHideFlags: 0

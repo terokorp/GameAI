@@ -276,6 +276,9 @@ MonoBehaviour:
   pivot: {fileID: 7439188860138363491}
   projectilePrefab: {fileID: -1665938504495627229, guid: ad3802a9504adbf4d9a4a096805f543b, type: 3}
   projectileSpawnpoint: {fileID: 3660814564150055052}
+  spawnInterval: 3
+  aimTarget: {fileID: 0}
+  rotationSpeed: 70
 --- !u!1 &8765276405633158180
 GameObject:
   m_ObjectHideFlags: 0

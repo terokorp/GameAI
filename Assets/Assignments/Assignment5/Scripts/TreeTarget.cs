@@ -2,15 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tree : MonoBehaviour, IAiTask
+public class TreeTarget : MonoBehaviour, IAiTask
 {
     [SerializeField] bool aiCollectable = true;
     [SerializeField] int _priority;
+    [SerializeField] float workDistance = .2f;
     [SerializeField] private AnimationStates workAnimation;
     private AutonomyTask task;
+    private Health health;
 
     int IAiTask.Priority { get => _priority; set => _priority = value; }
 
+    private void Awake()
+    {
+        health = GetComponent<Health>();
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +29,7 @@ public class Tree : MonoBehaviour, IAiTask
             taskObject = this,
             taskPriority = _priority,
             taskPosition = transform,
-            workDistance = 0.2f,
+            workDistance = workDistance,
             queueTime = Time.time
         };
         AiTaskManager.AddTask(task);
@@ -32,11 +38,16 @@ public class Tree : MonoBehaviour, IAiTask
     IEnumerator IAiTask.DoTask(Character character)
     {
         Debug.Log("DoTask");
-        // Starting animation
-        yield return character.AnimationWait(workAnimation);
+        while (health.health >= 0f)
+        {
+            // Starting animation
+            yield return character.AnimationWait(workAnimation);
+            health.TakeDamage(1);
+
+        }
+        
         // Returning to idle
         character.AnimationSet(AnimationStates.IDLE);
         AiTaskManager.RemoveTask(task);
-        Destroy(gameObject);
     }
 }

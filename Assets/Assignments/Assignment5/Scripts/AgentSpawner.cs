@@ -31,6 +31,9 @@ public class AgentSpawner : MonoBehaviour
 
     private void Spawn()
     {
+        if (AgentManager.Instance.autonomies.Count > 50)
+            return;
+
         List<Autonomy> agentPrefabs = AgentManager.Instance.agentPrefabs;
         Instantiate(agentPrefabs[UnityEngine.Random.Range(0, agentPrefabs.Count)], transform.position, transform.rotation, transform);
     }

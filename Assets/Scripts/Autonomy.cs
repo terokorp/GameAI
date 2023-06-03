@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
@@ -56,9 +57,9 @@ public class Autonomy : MonoBehaviour
             if (_task.HasValue)
             {
                 _agent.SetDestination(_task.Value.taskPosition.position);
-                yield return new WaitUntil(() => (_agent.hasPath == true && _agent.pathPending == false) && CheckWorkDistance(_task)); // TODO is distance reached
+                yield return new WaitUntil(() => (_agent.hasPath == true && _agent.pathPending == false) && CheckIsTaskDone(_task.Value));
 
-                if (_task.HasValue && _task.Value.taskPosition != null && _task.Value.taskObject != null)
+                if (CheckisTaskValid(_task.Value))
                     yield return _task.Value.taskObject.DoTask(_character);
             }
             else
@@ -66,13 +67,21 @@ public class Autonomy : MonoBehaviour
         }
     }
 
-    private bool CheckWorkDistance(AutonomyTask? task)
+    private bool CheckisTaskValid(AutonomyTask? task)
     {
         if (!task.HasValue)
-            return true;
-        if (task.Value.taskPosition == null)
-            return true;
+            return false;
+        if (!AiTaskManager.Instance.tasks.Contains(task.Value))
+            return false;
+        if (task.Value.taskPosition == null || task.Value.taskObject == null)
+            return false;
+        return true;
+    }
 
+    private bool CheckIsTaskDone(AutonomyTask? task)
+    {
+        if (!CheckisTaskValid(task.Value))
+            return true;
         return Vector3.Distance(_agent.transform.position, task.Value.taskPosition.position) <= task.Value.workDistance;
     }
 
@@ -103,6 +112,10 @@ public class Autonomy : MonoBehaviour
         return false;
     }
 
+    internal float GetDistanceToTarget()
+    {
+        return _agent.remainingDistance;
+    }
 
     private void OnDrawGizmos()
     {

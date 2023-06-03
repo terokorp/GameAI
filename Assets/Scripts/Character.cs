@@ -8,9 +8,9 @@ public class Character : MonoBehaviour, IStateCallback
     private NavMeshAgent _agent;
     private Animator _animator;
     private static int animStateID = Animator.StringToHash("AnimationState");
-    private AnimationStates state;
 
-    bool animationIsPlaying = false;
+    bool waitinForAnimation = false;
+    private AnimationStates state;
 
     private void Awake()
     {
@@ -23,23 +23,29 @@ public class Character : MonoBehaviour, IStateCallback
     // Update is called once per frame
     void Update()
     {
-        state = AnimationStates.IDLE;
-        if (_agent.velocity.magnitude > 0.1f)
+        AnimationStates newState;
+        if(state == AnimationStates.IDLE || state == AnimationStates.WALK)
         {
-            state = AnimationStates.WALK;
+            newState = _agent.velocity.magnitude > 0.1f ? AnimationStates.WALK : AnimationStates.IDLE;
+            AnimationSet(newState);
         }
-        _animator.SetInteger(animStateID, (int)state);
     }
 
     internal IEnumerator AnimationWait(AnimationStates workAnimation)
     {
-        _animator.SetInteger(animStateID, (int)workAnimation);
-        yield return new WaitUntil(() => animationIsPlaying == false);
+        AnimationSet(workAnimation);
+        waitinForAnimation = true;
+        yield return new WaitUntil(() => waitinForAnimation == false);
     }
 
-    internal void AnimationSet(AnimationStates state)
+    internal void AnimationSet(AnimationStates newState)
     {
-        _animator.SetInteger(animStateID, (int)state);
+        if (state == newState)
+            return;
+        Debug.Log("State changed " + newState);
+        waitinForAnimation = false;
+        state = newState;
+        _animator.SetInteger(animStateID, (int)newState);
     }
 
     void IStateCallback.OnStateEnter() 
@@ -48,7 +54,7 @@ public class Character : MonoBehaviour, IStateCallback
     }
     void IStateCallback.OnStateExit()
     {
-        animationIsPlaying = false;
+        waitinForAnimation = false;
     }
 
     internal void SetPosition(Vector3 position, Quaternion rotation)
@@ -56,5 +62,17 @@ public class Character : MonoBehaviour, IStateCallback
         _agent.nextPosition = position;
         transform.position = position;
         transform.rotation = rotation;
+    }
+
+    public void Die()
+    {
+        StartCoroutine(DieAnimation());
+    }
+
+    private IEnumerator DieAnimation()
+    {
+        AnimationSet(AnimationStates.CROUCH);
+        yield return new WaitUntil(() => waitinForAnimation == false);
+        Destroy(gameObject);
     }
 }
