@@ -1,35 +1,16 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PushObjectTask : MonoBehaviour, IAiTask
+public class PushObjectTask : AiTask
 {
-    [SerializeField] int _priority = 10;
     [SerializeField] private AnimationStates workAnimation;
-    private AutonomyTask task;
     [SerializeField] float pushDistance = 3f;
     [SerializeField] AnimationCurve cuve;
     [SerializeField] private float pushSpeed = .2f;
     [SerializeField] UnityEvent OnTaskDone;
-    int IAiTask.Priority { get => _priority; set => _priority = value; }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        task = new AutonomyTask
-        {
-            name = gameObject.name,
-            taskObject = this,
-            taskPriority = _priority,
-            taskPosition = transform,
-            workDistance = 0.1f,
-            queueTime = Time.time
-        };
-        AiTaskManager.AddTask(task);
-    }
-
-    IEnumerator IAiTask.DoTask(Character character)
+    internal protected override IEnumerator DoTask(Character character)
     {
         Debug.Log("DoTask PushObjectTask");
         character.transform.rotation = transform.rotation;
@@ -65,6 +46,11 @@ public class PushObjectTask : MonoBehaviour, IAiTask
         AiTaskManager.RemoveTask(task);
         yield return new WaitForSeconds(.5f);
         OnTaskDone?.Invoke();
+    }
+
+    internal protected override bool IsValid(Character character)
+    {
+        return true;
     }
 
     private void OnDrawGizmosSelected()

@@ -94,6 +94,8 @@ GameObject:
   - component: {fileID: 6008383609523536432}
   - component: {fileID: 7263684538300173717}
   - component: {fileID: 4839467254052682079}
+  - component: {fileID: 5790145291386854249}
+  - component: {fileID: 2662287982022770043}
   m_Layer: 7
   m_Name: Tree
   m_TagString: Untagged
@@ -167,3 +169,47 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5790145291386854249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6352821657444178058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56ae3f16331b7534282a3a9d5e3a17b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aiCollectable: 1
+  _priority: 1
+  workDistance: 2
+  workAnimation: 2
+--- !u!114 &2662287982022770043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6352821657444178058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b24f207ec3707cf43ae46c523b20d9fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 5
+  OnDying:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5899350471966164905}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

@@ -25,6 +25,6 @@ public class AiTaskManager : MonoBehaviour
 
     private static bool ValidateTask(AutonomyTask autonomyTask)
     {
-        return autonomyTask.taskObject != null;
+        return autonomyTask.task != null;
     }
 }

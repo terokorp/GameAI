@@ -11,9 +11,8 @@ GameObject:
   - component: {fileID: 8076590681766287536}
   - component: {fileID: 5168456697993746197}
   - component: {fileID: 6944265518412407775}
-  - component: {fileID: 2537838547825289139}
   m_Layer: 0
-  m_Name: Carrot
+  m_Name: Carrot Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8889543549517333002}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 38.20153, y: -0.0000009536743, z: -41.38922}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -84,18 +83,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2537838547825289139
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8889543549517333002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f4f458c28507924491dbba99af38acc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  growTime: 5
-  smallSizeScale: 0.1
-  fullSizeScale: 0.2

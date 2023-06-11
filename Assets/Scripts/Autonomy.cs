@@ -56,11 +56,11 @@ public class Autonomy : MonoBehaviour
 
             if (_task.HasValue)
             {
-                _agent.SetDestination(_task.Value.taskPosition.position);
+                _agent.SetDestination(_task.Value.taskTransform.position);
                 yield return new WaitUntil(() => (_agent.hasPath == true && _agent.pathPending == false) && CheckIsTaskDone(_task.Value));
 
                 if (CheckisTaskValid(_task.Value))
-                    yield return _task.Value.taskObject.DoTask(_character);
+                    yield return _task.Value.task.DoTask(_character);
             }
             else
                 yield return new WaitForSeconds(1f); // No task, doing nothing
@@ -73,7 +73,7 @@ public class Autonomy : MonoBehaviour
             return false;
         if (!AiTaskManager.Instance.tasks.Contains(task.Value))
             return false;
-        if (task.Value.taskPosition == null || task.Value.taskObject == null)
+        if (task.Value.taskTransform == null || task.Value.task == null)
             return false;
         return true;
     }
@@ -82,7 +82,7 @@ public class Autonomy : MonoBehaviour
     {
         if (!CheckisTaskValid(task.Value))
             return true;
-        return Vector3.Distance(_agent.transform.position, task.Value.taskPosition.position) <= task.Value.workDistance;
+        return Vector3.Distance(_agent.transform.position, task.Value.taskTransform.position) <= task.Value.workDistance;
     }
 
     // Solves which task to do
@@ -91,9 +91,9 @@ public class Autonomy : MonoBehaviour
         //Debug.Log("Solving task");
         _task = null;
 
-        foreach (var t in AiTaskManager.Instance.tasks.OrderBy(o => o.taskPriority).ThenBy(o => o.queueTime))
+        foreach (var t in AiTaskManager.Instance.tasks.OrderBy(o => o.priority).ThenBy(o => o.queueTime))
         {
-            if (TryTask(t, ref _path))
+            if (t.task.IsValid(_character) && IsPathValid(t, ref _path))
             {
                 _task = t;
                 break;
@@ -104,9 +104,9 @@ public class Autonomy : MonoBehaviour
         }
     }
 
-    private bool TryTask(AutonomyTask t, ref NavMeshPath path)
+    private bool IsPathValid(AutonomyTask t, ref NavMeshPath path)
     {
-        _agent.CalculatePath(t.taskPosition.position, path);
+        _agent.CalculatePath(t.taskTransform.position, path);
         if (path.status == NavMeshPathStatus.PathComplete)
             return true;
         return false;
