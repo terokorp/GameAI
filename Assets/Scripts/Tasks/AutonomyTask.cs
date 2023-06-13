@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 
 [System.Serializable]
-public struct AutonomyTask
+public class AutonomyTask
 {
     public string name;
     public AiTask task;
@@ -11,4 +11,5 @@ public struct AutonomyTask
     internal Transform taskTransform;
     internal int priority;
     internal float workDistance;
+    internal bool IsTaken { get; set; }
 }

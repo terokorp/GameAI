@@ -37,7 +37,12 @@ public class CarrotTask : AiTask
     }
     internal protected override IEnumerator DoTask(Character character)
     {
-        throw new NotImplementedException();
+        if (character is FarmCharacter c)
+        {
+            c.hasCarrot = true;
+        }
+        yield return new WaitForEndOfFrame();
+        Destroy(transform);
     }
 
     internal protected override bool IsValid(Character character)

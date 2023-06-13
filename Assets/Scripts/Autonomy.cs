@@ -10,8 +10,9 @@ public class Autonomy : MonoBehaviour
     private NavMeshAgent _agent;
     private Character _character;
     private NavMeshPath _path = null;
-    private AutonomyTask? _task;
+    private AutonomyTask _task;
     private Coroutine _tasksCoroutine;
+    [SerializeField] private float taskDistanceModifier=5f;
 
     #region Unity Callbacks
     // Awake is called when the script instance is being loaded
@@ -54,13 +55,13 @@ public class Autonomy : MonoBehaviour
         {
             yield return SolveTask();
 
-            if (_task.HasValue)
+            if (_task != null)
             {
-                _agent.SetDestination(_task.Value.taskTransform.position);
-                yield return new WaitUntil(() => (_agent.hasPath == true && _agent.pathPending == false) && CheckIsTaskDone(_task.Value));
+                _agent.SetDestination(_task.taskTransform.position);
+                yield return new WaitUntil(() => (_agent.hasPath == true && _agent.pathPending == false) && CheckIsTaskDone(_task));
 
-                if (CheckisTaskValid(_task.Value))
-                    yield return _task.Value.task.DoTask(_character);
+                if (CheckisTaskValid(_task))
+                    yield return _task.task.DoTask(_character);
             }
             else
                 yield return new WaitForSeconds(1f); // No task, doing nothing
@@ -69,20 +70,20 @@ public class Autonomy : MonoBehaviour
 
     private bool CheckisTaskValid(AutonomyTask? task)
     {
-        if (!task.HasValue)
+        if (task == null)
             return false;
-        if (!AiTaskManager.Instance.tasks.Contains(task.Value))
+        if (!AiTaskManager.Instance.tasks.Contains(task))
             return false;
-        if (task.Value.taskTransform == null || task.Value.task == null)
+        if (task.taskTransform == null || task.task == null)
             return false;
         return true;
     }
 
     private bool CheckIsTaskDone(AutonomyTask? task)
     {
-        if (!CheckisTaskValid(task.Value))
+        if (!CheckisTaskValid(task))
             return true;
-        return Vector3.Distance(_agent.transform.position, task.Value.taskTransform.position) <= task.Value.workDistance;
+        return Vector3.Distance(_agent.transform.position, task.taskTransform.position) <= task.workDistance;
     }
 
     // Solves which task to do
@@ -91,11 +92,13 @@ public class Autonomy : MonoBehaviour
         //Debug.Log("Solving task");
         _task = null;
 
-        foreach (var t in AiTaskManager.Instance.tasks.OrderBy(o => o.priority).ThenBy(o => o.queueTime))
+        foreach (var t in AiTaskManager.Instance.tasks.OrderByDescending(o => o.priority - ((transform.position - o.taskTransform.position).magnitude * taskDistanceModifier)).ThenBy(o => o.queueTime))
         {
-            if (t.task.IsValid(_character) && IsPathValid(t, ref _path))
+            if (t.task.IsValid(_character) && IsPathValid(t, ref _path) && !t.IsTaken)
             {
+                Debug.DrawLine(transform.position, t.taskTransform.position, Color.red, 1f);
                 _task = t;
+                t.IsTaken = true;
                 break;
             }
 

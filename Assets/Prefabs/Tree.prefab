@@ -181,10 +181,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56ae3f16331b7534282a3a9d5e3a17b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aiCollectable: 1
+  task:
+    name: 
+    task: {fileID: 0}
   _priority: 1
   workDistance: 2
   workAnimation: 2
+  logPrefab: {fileID: 7538462662886369784, guid: ce95a85e34aadb74aad119bc12d4d0ed, type: 3}
+  dropRadius: 2
 --- !u!114 &2662287982022770043
 MonoBehaviour:
   m_ObjectHideFlags: 0
