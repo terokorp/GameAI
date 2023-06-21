@@ -1,0 +1,16 @@
+{
+    "name": "UnityStandardAssets",
+    "rootNamespace": "",
+    "references": [
+        "GUID:dd73b65400c9f2848b3e531ef64dfecc"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
