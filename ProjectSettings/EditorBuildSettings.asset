@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Assignments/Assignment8/Assignment8.unity
     guid: 29f95e4724ad03042976f0445be8ca27
+  - enabled: 1
+    path: Assets/Final/DrivingAi.unity
+    guid: 3642ce584404cb7498049f37b17ea442
   m_configObjects: {}
